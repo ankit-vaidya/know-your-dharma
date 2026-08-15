@@ -14,6 +14,10 @@ class Settings(BaseSettings):
 
     redis_password: str
 
+    keycloak_url: str = "http://localhost:8080"
+    keycloak_realm: str = "know-your-dharma"
+    keycloak_client_id: str = "kyd-api"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
@@ -28,6 +32,20 @@ class Settings(BaseSettings):
             f"{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}"
             f"/{self.postgres_db}"
+        )
+
+    @property
+    def keycloak_issuer(self) -> str:
+        return (
+            f"{self.keycloak_url}"
+            f"/realms/{self.keycloak_realm}"
+        )
+
+    @property
+    def keycloak_jwks_url(self) -> str:
+        return (
+            f"{self.keycloak_issuer}"
+            "/protocol/openid-connect/certs"
         )
 
 

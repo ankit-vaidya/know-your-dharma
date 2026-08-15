@@ -40,6 +40,9 @@ where = ["."]
 line-length = 100
 target-version = "py313"
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "SIM"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/versions/*.py" = ["E501"]

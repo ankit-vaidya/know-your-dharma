@@ -1,10 +1,9 @@
 import uuid
 from datetime import datetime
 
+from backend.app.db.base import Base
 from sqlalchemy import Boolean, DateTime, String, func
 from sqlalchemy.orm import Mapped, mapped_column
-
-from backend.app.db.base import Base
 
 
 class User(Base):
@@ -15,6 +14,12 @@ class User(Base):
         default=uuid.uuid4,
     )
 
+    keycloak_user_id: Mapped[uuid.UUID] = mapped_column(
+        unique=True,
+        index=True,
+        nullable=False,
+    )
+
     email: Mapped[str] = mapped_column(
         String(320),
         unique=True,
@@ -22,7 +27,7 @@ class User(Base):
         nullable=False,
     )
 
-    password_hash: Mapped[str | None] = mapped_column(
+    display_name: Mapped[str | None] = mapped_column(
         String(255),
         nullable=True,
     )

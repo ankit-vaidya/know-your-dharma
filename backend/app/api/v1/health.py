@@ -1,9 +1,8 @@
+from backend.app.db.session import engine
+from backend.app.services.qdrant import qdrant_client
+from backend.app.services.redis import redis_client
 from fastapi import APIRouter
 from sqlalchemy import text
-
-from backend.app.db.session import engine
-from backend.app.services.redis import redis_client
-from backend.app.services.qdrant import qdrant_client
 
 router = APIRouter()
 
