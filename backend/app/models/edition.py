@@ -89,6 +89,6 @@ class Edition(Base):
         back_populates="edition",
     )
 
-    verses: Mapped[list["Verse"]] = relationship(
+    verse_contents: Mapped[list["VerseContent"]] = relationship(
         back_populates="edition",
     )

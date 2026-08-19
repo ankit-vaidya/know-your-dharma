@@ -22,13 +22,6 @@ class Verse(Base):
         index=True,
     )
 
-    edition_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("editions.id", ondelete="CASCADE"),
-        nullable=False,
-        index=True,
-    )
-
     verse_number: Mapped[int] = mapped_column(
         Integer,
         nullable=False,
@@ -38,16 +31,6 @@ class Verse(Base):
         String(255),
         nullable=False,
         index=True,
-    )
-
-    text: Mapped[str] = mapped_column(
-        Text,
-        nullable=False,
-    )
-
-    source_reference: Mapped[str | None] = mapped_column(
-        String(255),
-        nullable=True,
     )
 
     sort_order: Mapped[int] = mapped_column(
@@ -72,6 +55,7 @@ class Verse(Base):
         back_populates="verses",
     )
 
-    edition: Mapped["Edition"] = relationship(
-        back_populates="verses",
+    contents: Mapped[list["VerseContent"]] = relationship(
+        back_populates="verse",
+        cascade="all, delete-orphan",
     )

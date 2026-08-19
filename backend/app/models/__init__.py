@@ -6,6 +6,7 @@ from backend.app.models.section import Section
 from backend.app.models.source import Source
 from backend.app.models.user import User
 from backend.app.models.verse import Verse
+from backend.app.models.verse_content import VerseContent
 
 __all__ = [
     "Document",
@@ -16,4 +17,5 @@ __all__ = [
     "Source",
     "User",
     "Verse",
+    "VerseContent",
 ]
